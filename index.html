@@ -19,8 +19,8 @@
   .stars{position:absolute;inset:0;}
   .star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);}
   @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
-  .moon{position:absolute;top:40px;right:120px;width:60px;height:60px;background:radial-gradient(circle at 35% 35%,#fffde0,#f0d060);border-radius:50%;box-shadow:0 0 40px rgba(240,208,96,.4),0 0 80px rgba(240,208,96,.15);transition:opacity 1.5s;}
-  .sun{position:absolute;top:30px;right:140px;width:70px;height:70px;background:radial-gradient(circle,#fff9c4,#FFD700);border-radius:50%;box-shadow:0 0 60px rgba(255,215,0,.7),0 0 120px rgba(255,215,0,.3);opacity:0;transition:opacity 1.5s;}
+  .moon{position:absolute;top:40px;right:120px;width:60px;height:60px;background:radial-gradient(circle at 35% 35%,#fffde0,#f0d060);border-radius:50%;box-shadow:0 0 40px rgba(240,208,96,.4),0 0 80px rgba(240,208,96,.2);opacity:0;transition:opacity 1.8s;}
+  .sun{position:absolute;top:30px;right:140px;width:70px;height:70px;background:radial-gradient(circle,#fff9c4,#FFD700);border-radius:50%;box-shadow:0 0 60px rgba(255,215,0,.7),0 0 120px rgba(255,215,0,.3);opacity:0;transition:opacity 1.8s;}
   .particles{position:absolute;inset:0;pointer-events:none;}
   .particle{position:absolute;border-radius:50%;animation:fall var(--pd,4s) linear infinite var(--ps,0s);opacity:0;}
   @keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:.9}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
@@ -93,7 +93,7 @@
   .page-wrap{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px;}
 
   /* Open Now pill — top right */
-  .open-now-pill{position:fixed;top:16px;right:16px;z-index:20;background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px;max-width:210px;animation:fadeDown .8s ease both;}
+  .open-now-pill{position:fixed;top:16px;right:16px;z-index:20;background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px;max-width:180px;}
   .pill-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:4px;}
   .pill-dot{display:inline-block;width:6px;height:6px;background:#2ecc71;border-radius:50%;margin-right:5px;animation:blink 1.4s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
@@ -101,30 +101,30 @@
   .pill-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:2px;}
 
   /* Festival badge — top left */
-  .festival-mood{position:fixed;top:16px;left:16px;z-index:20;background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 16px;font-size:14px;font-weight:600;opacity:0;transition:opacity .8s;letter-spacing:.3px;}
+  .festival-mood{position:fixed;top:16px;left:16px;z-index:20;background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 16px;font-size:14px;color:white;opacity:0;transition:opacity 1s;}
 
   /* Header */
   .header{text-align:center;margin-bottom:36px;animation:fadeDown .8s ease both;}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-  .logo-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);border-radius:100px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#e74c3c;}
-  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;line-height:1;background:linear-gradient(135deg,#ffffff 0%,#f0d060 50%,#e67e22 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
+  .logo-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);border-radius:100px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:600;color:#e67e22;letter-spacing:1px;}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;line-height:1;background:linear-gradient(135deg,#ffffff 0%,#f0d060 50%,#e67e22 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
   .tagline{font-size:15px;color:var(--steel);letter-spacing:1px;}
 
   /* Card */
-  .card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .2s both;}
+  .card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .2s both;box-shadow:0 20px 60px rgba(0,0,0,.3);}
   @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
   .field-group{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
   .field{display:flex;flex-direction:column;gap:8px;}
   .field label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--steel);}
-  .field input,.field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'DM Sans',sans-serif;color:white;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;appearance:none;cursor:pointer;}
+  .field input,.field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'DM Sans',sans-serif;color:white;outline:none;transition:all .3s;}
   .field input:focus,.field select:focus{border-color:rgba(230,126,34,.6);background:rgba(255,255,255,.09);}
   .field select option{background:#1a1a2e;color:white;}
   .field input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1) opacity(.5);cursor:pointer;}
 
   /* Train button */
   .btn-train{width:100%;padding:0;border:none;background:none;cursor:pointer;margin-top:8px;}
-  .btn-track{width:100%;height:12px;background:repeating-linear-gradient(90deg,transparent 0,transparent 16px,rgba(255,255,255,.15) 16px,rgba(255,255,255,.15) 28px);border-top:3px solid rgba(255,255,255,.25);border-bottom:3px solid rgba(255,255,255,.25);margin-bottom:2px;border-radius:2px;}
-  .btn-engine-wrap{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#8B0000,#C0392B);border-radius:12px;padding:14px 24px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:white;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 20px rgba(192,57,43,.4);position:relative;overflow:hidden;}
+  .btn-track{width:100%;height:12px;background:repeating-linear-gradient(90deg,transparent 0,transparent 16px,rgba(255,255,255,.15) 16px,rgba(255,255,255,.15) 28px);border-top:3px solid rgba(255,255,255,.1);border-bottom:3px solid rgba(255,255,255,.1);}
+  .btn-engine-wrap{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#8B0000,#C0392B);border-radius:12px;padding:14px 24px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:white;position:relative;transition:all .3s;box-shadow:0 4px 15px rgba(192,57,43,.3);}
   .btn-engine-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);pointer-events:none;}
   .btn-train:hover .btn-engine-wrap{transform:translateX(8px);box-shadow:0 6px 30px rgba(192,57,43,.6);}
   .btn-train:active .btn-engine-wrap{transform:translateX(2px);}
@@ -157,7 +157,7 @@
   .alert-title{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--steel);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
   .alert-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08);}
   .alert-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-  .alert-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;color:white;font-size:11px;font-weight:600;letter-spacing:.5px;text-align:center;transition:all .2s;text-transform:uppercase;}
+  .alert-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;transition:all .3s;color:white;}
   .alert-btn:hover{border-color:rgba(230,126,34,.4);background:rgba(230,126,34,.08);transform:translateY(-2px);}
   .alert-btn .icon{font-size:20px;}
   .tip-box{margin-top:16px;padding:14px 16px;background:rgba(241,196,15,.06);border:1px solid rgba(241,196,15,.2);border-radius:12px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;}
@@ -248,7 +248,7 @@
 <div class="page-wrap">
   <div class="header">
     <div class="logo-badge">🚆 IRCTC Booking Tool</div>
-    <h1>RailBooker</h1>
+    <h1>Find My Booking Date</h1>
     <p class="tagline">Never miss your booking window again</p>
   </div>
 
@@ -336,12 +336,12 @@
 /* ── FESTIVAL THEMES ── */
 const THEMES = {
   default:   { sky:['#0a0a1a','#0f1a2e','#1a2a1a','#0f1a0f'], ground:'#111811', tree:'#0d2b0d', mtn:'#0a1a0a', moon:1, sun:0, particles:[], label:'' },
-  newyear:   { sky:['#05001f','#0a0038','#050025','#020010'], ground:'#0a0818', tree:'#0d0d25', mtn:'#050018', moon:.9, sun:0, particles:[{c:'#FFD700'},{c:'#FF69B4'},{c:'#00BFFF'},{c:'#FF6347'},{c:'#fff'},{c:'#ADFF2F'}], label:'🎆 Happy New Year!' },
-  holi:      { sky:['#1a0530','#2d1555','#3a1040','#18051f'], ground:'#1a0d1a', tree:'#330d33', mtn:'#12031a', moon:.5, sun:.4, particles:[{c:'#FF1493'},{c:'#00BFFF'},{c:'#FFD700'},{c:'#FF6347'},{c:'#7B68EE'},{c:'#00FF7F'},{c:'#FF69B4'},{c:'#FFA500'}], label:'🎨 Happy Holi!' },
-  summer:    { sky:['#0a1a3a','#0f2a5a','#1a3a6a','#0f2050'], ground:'#1a2010', tree:'#1a4a1a', mtn:'#0a1a0a', moon:.3, sun:1, particles:[{c:'#FFD700',s:3},{c:'#FFF9C4',s:2}], label:'☀️ Summer Vacations!' },
-  dussehra:  { sky:['#0f0a00','#2a1500','#1a0f00','#0f0800'], ground:'#1a1000', tree:'#1a2800', mtn:'#0a0800', moon:.8, sun:0, particles:[{c:'#FF4500'},{c:'#FF8C00'},{c:'#FFD700'},{c:'#FF6347'}], label:'🏹 Dussehra Vibes!' },
-  diwali:    { sky:['#0f0800','#1f1200','#0f0800','#080400'], ground:'#1a0f00', tree:'#1a1500', mtn:'#0a0800', moon:.5, sun:0, particles:[{c:'#FFD700'},{c:'#FF8C00'},{c:'#FF4500'},{c:'#FFA500'},{c:'#FFEC8B'},{c:'#FF6347'}], label:'🪔 Shubh Diwali!' },
-  christmas: { sky:['#001a0a','#002a14','#001a0a','#001005'], ground:'#d8eef8', tree:'#0d3d0d', mtn:'#b0cee0', moon:1, sun:0, particles:[{c:'#fff',s:10},{c:'#e0f0ff',s:7},{c:'#cce8ff',s:5}], label:'🎄 Merry Christmas!' }
+  newyear:   { sky:['#05001f','#0a0038','#050025','#020010'], ground:'#0a0818', tree:'#0d0d25', mtn:'#050018', moon:.9, sun:0, particles:[{c:'#FFD700'},{c:'#FF69B4'},{c:'#00BFFF'},{c:'#FF6347'},{c:'#FFD700'}], label:'🎆 New Year' },
+  holi:      { sky:['#1a0530','#2d1555','#3a1040','#18051f'], ground:'#1a0d1a', tree:'#330d33', mtn:'#12031a', moon:.5, sun:.4, particles:[{c:'#FF1493'},{c:'#00BFFF'},{c:'#FFD700'},{c:'#FF6347'},{c:'#32CD32'}], label:'🎨 Holi Colors' },
+  summer:    { sky:['#0a1a3a','#0f2a5a','#1a3a6a','#0f2050'], ground:'#1a2010', tree:'#1a4a1a', mtn:'#0a1a0a', moon:.3, sun:1, particles:[{c:'#FFD700',s:3},{c:'#FFF9C4',s:2}], label:'☀️ Summer Vacation' },
+  dussehra:  { sky:['#0f0a00','#2a1500','#1a0f00','#0f0800'], ground:'#1a1000', tree:'#1a2800', mtn:'#0a0800', moon:.8, sun:0, particles:[{c:'#FF4500'},{c:'#FF8C00'},{c:'#FFD700'},{c:'#FF6347'}], label:'🏹 Dussehra' },
+  diwali:    { sky:['#0f0800','#1f1200','#0f0800','#080400'], ground:'#1a0f00', tree:'#1a1500', mtn:'#0a0800', moon:.5, sun:0, particles:[{c:'#FFD700'},{c:'#FF8C00'},{c:'#FF4500'},{c:'#FFA500'},{c:'#FFD700'}], label:'🪔 Diwali' },
+  christmas: { sky:['#001a0a','#002a14','#001a0a','#001005'], ground:'#d8eef8', tree:'#0d3d0d', mtn:'#b0cee0', moon:1, sun:0, particles:[{c:'#fff',s:10},{c:'#e0f0ff',s:7},{c:'#cce8ff',s:5}], label:'🎄 Christmas' },
 };
 
 function themeForMonth(m) {
