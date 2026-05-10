@@ -21,6 +21,15 @@
   @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
   .moon{position:absolute;top:40px;right:120px;width:60px;height:60px;background:radial-gradient(circle at 35% 35%,#fffde0,#f0d060);border-radius:50%;box-shadow:0 0 40px rgba(240,208,96,.4),0 0 80px rgba(240,208,96,.2);opacity:0;transition:opacity 1.8s;}
   .sun{position:absolute;top:30px;right:140px;width:70px;height:70px;background:radial-gradient(circle,#fff9c4,#FFD700);border-radius:50%;box-shadow:0 0 60px rgba(255,215,0,.7),0 0 120px rgba(255,215,0,.3);opacity:0;transition:opacity 1.8s;}
+  
+  /* ── CLOUDS ── */
+  .clouds-container{position:absolute;inset:0;overflow:hidden;z-index:2;}
+  .cloud{position:absolute;background:rgba(255,255,255,0.7);border-radius:100px;opacity:0.6;animation:drift var(--duration,20s) linear infinite;}
+  .cloud::before,.cloud::after{content:'';position:absolute;background:inherit;border-radius:inherit;}
+  .cloud::before{width:50px;height:50px;top:-25px;left:10px;}
+  .cloud::after{width:40px;height:40px;top:-20px;right:10px;}
+  @keyframes drift{0%{transform:translateX(-100px)}100%{transform:translateX(calc(100vw + 100px))}}
+  
   .particles{position:absolute;inset:0;pointer-events:none;}
   .particle{position:absolute;border-radius:50%;animation:fall var(--pd,4s) linear infinite var(--ps,0s);opacity:0;}
   @keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:.9}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
@@ -38,56 +47,39 @@
   .sleeper{width:14px;height:100%;background:#2a2a1a;border-radius:2px;flex-shrink:0;border:1px solid #3a3a2a;}
   @keyframes moveSleepers{from{transform:translateX(0)}to{transform:translateX(-42px)}}
 
-  /* ── TRAIN: moves right-to-left (engine leads, faces LEFT = train going LEFT visually)
-        Actually user wants LEFT→RIGHT direction.
-        Fix: train-wrap moves from right side off-screen to left side off-screen, train flex normal, engine on LEFT of DOM.
-        Engine faces LEFT naturally (light on left, cabin on right side).
-        To make engine FACE RIGHT: flip engine with scaleX(-1) but keep coaches normal.
-        Simpler: put engine first in DOM, coaches after. Train moves left→right. Engine is the lead car.
-  ── */
+  /* ── VANDE BHARAT TRAIN ── */
   .train-wrap{
     position:absolute;bottom:64px;
-    /* starts off-screen LEFT, moves to off-screen RIGHT */
-    animation:trainGoRight 20s linear infinite;
+    animation:trainMove 25s linear infinite;
   }
-  @keyframes trainGoRight{
-    0%  {left:-420px;}
+  @keyframes trainMove{
+    0%  {left:-200px;}
     100%{left:110vw;}
   }
-  .train{display:flex;align-items:flex-end;gap:3px;filter:drop-shadow(0 -4px 20px rgba(255,150,50,.3));}
+  .train{display:flex;align-items:flex-end;gap:0;filter:drop-shadow(0 -4px 20px rgba(100,180,255,.4));}
 
-  /* Engine (DOM first = visually leftmost = LEADS) */
-  .engine{position:relative;width:90px;height:55px;}
-  /* Body: rounded on RIGHT side (back), nose on LEFT (front) */
-  .engine-body{position:absolute;bottom:0;left:0;right:0;height:44px;background:linear-gradient(135deg,#8B0000,#C0392B,#a93226);border-radius:14px 4px 0 0;}
-  /* Cabin sits on left (front) area */
-  .engine-cabin{position:absolute;top:0;left:8px;width:36px;height:28px;background:#7B0000;border-radius:6px 3px 0 0;}
-  .engine-window{position:absolute;top:6px;left:6px;right:6px;height:14px;background:rgba(255,220,100,.7);border-radius:3px;box-shadow:inset 0 0 6px rgba(0,0,0,.3);}
-  /* Headlight on LEFT (front) */
-  .engine-light{position:absolute;top:16px;left:-5px;width:12px;height:12px;background:#F1C40F;border-radius:50%;box-shadow:0 0 20px rgba(241,196,15,.9),0 0 50px rgba(241,196,15,.5);}
-  /* Chimney on top */
-  .engine-chimney{position:absolute;top:-10px;left:20px;width:10px;height:14px;background:#5a5a5a;border-radius:2px 2px 0 0;}
-  /* Smoke from chimney */
-  .smoke{position:absolute;top:-28px;left:18px;display:flex;gap:4px;}
-  .smoke-puff{width:10px;height:10px;background:rgba(200,200,200,.5);border-radius:50%;animation:smokePuff var(--sd,1.5s) ease-out infinite var(--ss,0s);}
-  @keyframes smokePuff{0%{transform:translateY(0) scale(1);opacity:.5}100%{transform:translateY(-20px) scale(2.5);opacity:0}}
-  /* Headlight beam pointing RIGHT */
-  .headlight-beam{position:absolute;bottom:16px;left:-70px;width:70px;height:28px;background:linear-gradient(90deg,rgba(241,196,15,.2) 0%,transparent 100%);clip-path:polygon(100% 20%,100% 80%,0% 100%,0% 0%);}
-  .engine-wheel{position:absolute;bottom:-8px;width:18px;height:18px;background:#222;border:3px solid #888;border-radius:50%;animation:spin .6s linear infinite;}
-  .engine-wheel.w1{left:10px;}.engine-wheel.w2{left:34px;}.engine-wheel.w3{left:58px;}
+  /* Vande Bharat Engine - White & Silver futuristic */
+  .engine{position:relative;width:120px;height:70px;}
+  .engine-body{position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(135deg,#f0f0f0,#e0e0e0,#d0d0d0);border-radius:20px 8px 0 0;border:2px solid #888;}
+  .engine-cabin{position:absolute;top:2px;left:15px;width:50px;height:35px;background:linear-gradient(135deg,#c0c0c0,#a0a0a0);border-radius:12px;border:2px solid #666;}
+  .engine-window{position:absolute;top:6px;left:8px;right:8px;height:18px;background:linear-gradient(135deg,#87ceeb,#4da6ff);border-radius:6px;box-shadow:inset 0 0 8px rgba(0,0,0,.3);}
+  .engine-light{position:absolute;top:22px;left:-8px;width:16px;height:16px;background:#FFD700;border-radius:50%;box-shadow:0 0 25px rgba(255,215,0,1),0 0 50px rgba(255,215,0,.8);}
+  .engine-vents{position:absolute;top:-12px;left:30px;width:12px;height:16px;background:#888;border-radius:3px;box-shadow:inset 0 2px 4px rgba(0,0,0,.5);}
+  .engine-wheel{position:absolute;bottom:-12px;width:22px;height:22px;background:#222;border:4px solid #666;border-radius:50%;animation:spin .5s linear infinite;}
+  .engine-wheel.w1{left:8px;}.engine-wheel.w2{left:40px;}.engine-wheel.w3{left:72px;}
   @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-  /* Coaches */
-  .coach{position:relative;width:70px;height:46px;}
-  .coach-body{position:absolute;bottom:0;left:0;right:0;height:38px;border-radius:4px 4px 0 0;}
-  .coach-body.c1{background:linear-gradient(135deg,#1a5a8a,#2874a6);}
-  .coach-body.c2{background:linear-gradient(135deg,#1a6a4a,#27ae60);}
-  .coach-body.c3{background:linear-gradient(135deg,#1a5a8a,#2874a6);}
-  .coach-windows{position:absolute;top:8px;left:6px;right:6px;display:flex;gap:5px;}
-  .coach-win{flex:1;height:14px;background:rgba(255,220,100,.5);border-radius:2px;}
-  .coach-wheel{position:absolute;bottom:-7px;width:14px;height:14px;background:#222;border:2px solid #777;border-radius:50%;animation:spin .6s linear infinite;}
-  .coach-wheel.w1{left:8px;}.coach-wheel.w2{right:8px;}
-  .festival-flag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:12px;opacity:0;transition:opacity 1s;}
+  /* Vande Bharat Coaches - Sleek design */
+  .coach{position:relative;width:90px;height:60px;}
+  .coach-body{position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(135deg,#f5f5f5,#e8e8e8);border-radius:12px 0 0 0;border:2px solid #999;border-left:3px solid #999;}
+  .coach-body.c1,.coach-body.c3{background:linear-gradient(135deg,#f5f5f5,#e8e8e8);}
+  .coach-body.c2{background:linear-gradient(135deg,#e8f4f8,#d0e8f0);}
+  .coach-windows{position:absolute;top:10px;left:6px;right:6px;display:flex;gap:4px;}
+  .coach-win{flex:1;height:16px;background:linear-gradient(135deg,#87ceeb,#5da3cc);border-radius:3px;border:1px solid #666;}
+  .coach-wheel{position:absolute;bottom:-12px;width:18px;height:18px;background:#222;border:3px solid #666;border-radius:50%;animation:spin .5s linear infinite;}
+  .coach-wheel.w1{left:6px;}.coach-wheel.w2{right:6px;}
+  .pantograph{position:absolute;top:-15px;right:20px;width:4px;height:20px;background:#888;transform:rotate(-20deg);transform-origin:bottom;}
+  .festival-flag{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:14px;opacity:0;transition:opacity 1s;}
 
   /* ── LAYOUT ── */
   .page-wrap{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px;}
@@ -106,7 +98,6 @@
   /* Header */
   .header{text-align:center;margin-bottom:36px;animation:fadeDown .8s ease both;}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-  .logo-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);border-radius:100px;padding:6px 16px;margin-bottom:16px;font-size:12px;font-weight:600;color:#e67e22;letter-spacing:1px;}
   h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;line-height:1;background:linear-gradient(135deg,#ffffff 0%,#f0d060 50%,#e67e22 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
   .tagline{font-size:15px;color:var(--steel);letter-spacing:1px;}
 
@@ -124,9 +115,9 @@
   /* Train button */
   .btn-train{width:100%;padding:0;border:none;background:none;cursor:pointer;margin-top:8px;}
   .btn-track{width:100%;height:12px;background:repeating-linear-gradient(90deg,transparent 0,transparent 16px,rgba(255,255,255,.15) 16px,rgba(255,255,255,.15) 28px);border-top:3px solid rgba(255,255,255,.1);border-bottom:3px solid rgba(255,255,255,.1);}
-  .btn-engine-wrap{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#8B0000,#C0392B);border-radius:12px;padding:14px 24px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:white;position:relative;transition:all .3s;box-shadow:0 4px 15px rgba(192,57,43,.3);}
+  .btn-engine-wrap{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#2196F3,#1976D2);border-radius:12px;padding:14px 24px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:white;position:relative;transition:all .3s;box-shadow:0 4px 15px rgba(33,150,243,.4);}
   .btn-engine-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);pointer-events:none;}
-  .btn-train:hover .btn-engine-wrap{transform:translateX(8px);box-shadow:0 6px 30px rgba(192,57,43,.6);}
+  .btn-train:hover .btn-engine-wrap{transform:translateX(8px);box-shadow:0 6px 30px rgba(33,150,243,.7);}
   .btn-train:active .btn-engine-wrap{transform:translateX(2px);}
   .train-icon{font-size:28px;animation:trainBounce .5s ease infinite alternate;}
   @keyframes trainBounce{from{transform:translateY(0)}to{transform:translateY(-2px)}}
@@ -158,7 +149,7 @@
   .alert-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08);}
   .alert-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
   .alert-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;transition:all .3s;color:white;}
-  .alert-btn:hover{border-color:rgba(230,126,34,.4);background:rgba(230,126,34,.08);transform:translateY(-2px);}
+  .alert-btn:hover{border-color:rgba(33,150,243,.4);background:rgba(33,150,243,.08);transform:translateY(-2px);}
   .alert-btn .icon{font-size:20px;}
   .tip-box{margin-top:16px;padding:14px 16px;background:rgba(241,196,15,.06);border:1px solid rgba(241,196,15,.2);border-radius:12px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;}
   .footer{margin-top:32px;text-align:center;font-size:12px;color:rgba(255,255,255,.25);letter-spacing:.5px;}
@@ -177,6 +168,7 @@
 
 <div class="bg-scene">
   <div class="bg-sky" id="bgSky"></div>
+  <div class="clouds-container" id="cloudsContainer"></div>
   <div class="stars" id="stars"></div>
   <div class="sun" id="sun"></div>
   <div class="moon" id="moon"></div>
@@ -198,16 +190,10 @@
     <div class="rail bottom"></div>
   </div>
   <div class="train-wrap">
-    <!-- Engine FIRST in DOM = visually LEFTMOST = leads the train going right ✓ -->
     <div class="train">
+      <!-- Vande Bharat Engine -->
       <div class="engine">
-        <div class="headlight-beam"></div>
-        <div class="smoke">
-          <div class="smoke-puff" style="--sd:1.4s;--ss:0s;"></div>
-          <div class="smoke-puff" style="--sd:1.8s;--ss:.4s;"></div>
-          <div class="smoke-puff" style="--sd:1.6s;--ss:.8s;"></div>
-        </div>
-        <div class="engine-chimney"></div>
+        <div class="engine-vents"></div>
         <div class="engine-body">
           <div class="engine-light"></div>
           <div class="engine-cabin"><div class="engine-window"></div></div>
@@ -216,19 +202,23 @@
         <div class="engine-wheel w2"></div>
         <div class="engine-wheel w3"></div>
       </div>
+      <!-- Coaches -->
       <div class="coach">
+        <div class="pantograph"></div>
         <div class="festival-flag" id="ff1"></div>
-        <div class="coach-body c1"><div class="coach-windows"><div class="coach-win"></div><div class="coach-win"></div><div class="coach-win"></div></div></div>
+        <div class="coach-body c1"><div class="coach-windows"><div class="coach-win"></div><div class="coach-win"></div></div></div>
         <div class="coach-wheel w1"></div><div class="coach-wheel w2"></div>
       </div>
       <div class="coach">
+        <div class="pantograph"></div>
         <div class="festival-flag" id="ff2"></div>
-        <div class="coach-body c2"><div class="coach-windows"><div class="coach-win"></div><div class="coach-win"></div><div class="coach-win"></div></div></div>
+        <div class="coach-body c2"><div class="coach-windows"><div class="coach-win"></div><div class="coach-win"></div></div></div>
         <div class="coach-wheel w1"></div><div class="coach-wheel w2"></div>
       </div>
       <div class="coach">
+        <div class="pantograph"></div>
         <div class="festival-flag" id="ff3"></div>
-        <div class="coach-body c3"><div class="coach-windows"><div class="coach-win"></div><div class="coach-win"></div><div class="coach-win"></div></div></div>
+        <div class="coach-body c3"><div class="coach-windows"><div class="coach-win"></div><div class="coach-win"></div></div></div>
         <div class="coach-wheel w1"></div><div class="coach-wheel w2"></div>
       </div>
     </div>
@@ -247,7 +237,6 @@
 
 <div class="page-wrap">
   <div class="header">
-    <div class="logo-badge">🚆 IRCTC Booking Tool</div>
     <h1>Find My Booking Date</h1>
     <p class="tagline">Never miss your booking window again</p>
   </div>
@@ -275,7 +264,7 @@
     <button class="btn-train" onclick="calculate()">
       <div class="btn-track"></div>
       <div class="btn-engine-wrap">
-        <span class="train-icon">🚂</span>
+        <span class="train-icon">🚆</span>
         FIND BOOKING DATES
         <span style="font-size:18px">→</span>
       </div>
@@ -333,6 +322,31 @@
 </div>
 
 <script>
+/* ── CLOUDS GENERATOR ── */
+function spawnClouds() {
+  const container = document.getElementById('cloudsContainer');
+  const cloudConfigs = [
+    {top: '10%', width: '80px', height: '40px', duration: '25s', delay: '0s'},
+    {top: '25%', width: '100px', height: '50px', duration: '30s', delay: '5s'},
+    {top: '35%', width: '90px', height: '45px', duration: '28s', delay: '10s'},
+    {top: '15%', width: '110px', height: '55px', duration: '35s', delay: '15s'},
+    {top: '40%', width: '85px', height: '42px', duration: '26s', delay: '8s'},
+  ];
+  
+  cloudConfigs.forEach(config => {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud';
+    cloud.style.cssText = `
+      top: ${config.top};
+      width: ${config.width};
+      height: ${config.height};
+      --duration: ${config.duration};
+      animation-delay: ${config.delay};
+    `;
+    container.appendChild(cloud);
+  });
+}
+
 /* ── FESTIVAL THEMES ── */
 const THEMES = {
   default:   { sky:['#0a0a1a','#0f1a2e','#1a2a1a','#0f1a0f'], ground:'#111811', tree:'#0d2b0d', mtn:'#0a1a0a', moon:1, sun:0, particles:[], label:'' },
@@ -429,7 +443,10 @@ function spawnParticles(types) {
   const sw=document.getElementById('sleepers');
   for(let i=0;i<40;i++){const s=document.createElement('div');s.className='sleeper';sw.appendChild(s);}
 
-  // Today's open window pill: advance booking is open for journeys 60 days from today
+  // Clouds
+  spawnClouds();
+
+  // Today's open window pill
   const today=new Date(); today.setHours(0,0,0,0);
   const openFor=new Date(today); openFor.setDate(openFor.getDate()+60);
   document.getElementById('pillDate').textContent=openFor.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
@@ -474,7 +491,7 @@ function calculate(){
 
   // Advance: opens exactly 60 days before journey at 8 AM
   const advRaw=new Date(journey); advRaw.setDate(advRaw.getDate()-60);
-  const isAlreadyOpen = advRaw<=today; // booking window has already opened
+  const isAlreadyOpen = advRaw<=today;
 
   const tatkal=new Date(journey); tatkal.setDate(tatkal.getDate()-1);
   const premium=new Date(journey); premium.setDate(premium.getDate()-1);
@@ -485,7 +502,6 @@ function calculate(){
     premium:{ date: premium,                    hour:tHour, label:'Premium Tatkal'  }
   };
 
-  // Advance card
   const ca=document.getElementById('cardAdv');
   if(isAlreadyOpen){
     ca.className='r-card already-open';
@@ -530,7 +546,7 @@ function openAlert(type){
     const y=dt.getFullYear(),m=String(dt.getMonth()+1).padStart(2,'0'),dy=String(dt.getDate()).padStart(2,'0');
     return `${y}${m}${dy}T${String(hr).padStart(2,'0')}${String(mn).padStart(2,'0')}00`;
   };
-  const title=encodeURIComponent('🚂 IRCTC '+lbl+' Opens');
+  const title=encodeURIComponent('🚆 Train Booking '+lbl+' Opens');
   const details=encodeURIComponent('Log in to IRCTC and book your train tickets. Window opens at '+h+':00 AM IST.');
   window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${g(d,h,0)}/${g(d,h,30)}&details=${details}&sf=true&output=xml`,'_blank');
 }
