@@ -81,25 +81,22 @@
   .pantograph{position:absolute;top:-15px;right:20px;width:4px;height:20px;background:#888;transform:rotate(-20deg);transform-origin:bottom;}
   .festival-flag{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:14px;opacity:0;transition:opacity 1s;}
 
-  /* ── FLOATING TRAIN BUTTON ── */
-  .floating-train-btn{position:fixed;bottom:30px;left:30px;z-index:25;width:70px;height:70px;background:linear-gradient(135deg,#2196F3,#1976D2);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 25px rgba(33,150,243,.5);transition:all .3s ease;animation:floatingBounce 2s ease-in-out infinite;}
-  .floating-train-btn:hover{transform:scale(1.15);box-shadow:0 12px 35px rgba(33,150,243,.8);}
-  .floating-train-btn:active{transform:scale(0.95);}
-  @keyframes floatingBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-
   /* ── LAYOUT ── */
   .page-wrap{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px;}
 
-  /* Open Now pill — top right */
-  .open-now-pill{position:fixed;top:16px;right:16px;z-index:15;background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px;max-width:160px;pointer-events:auto;}
+  /* Top bar container */
+  .top-bar{position:fixed;top:16px;left:16px;right:16px;z-index:15;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;pointer-events:none;}
+  
+  /* Open Now pill */
+  .open-now-pill{background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px;max-width:160px;pointer-events:auto;}
   .pill-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:4px;}
   .pill-dot{display:inline-block;width:6px;height:6px;background:#2ecc71;border-radius:50%;margin-right:5px;animation:blink 1.4s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   .pill-date{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#5dade2;line-height:1.1;}
   .pill-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:2px;}
 
-  /* Festival badge — top left */
-  .festival-mood{position:fixed;top:16px;left:16px;z-index:15;background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 16px;font-size:14px;color:rgba(255,255,255,.8);}
+  /* Festival badge */
+  .festival-mood{background:rgba(10,10,20,.85);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 16px;font-size:14px;color:rgba(255,255,255,.8);pointer-events:auto;}
 
   /* Header */
   .header{text-align:center;margin-bottom:36px;animation:fadeDown .8s ease both;}
@@ -163,10 +160,10 @@
   .status-card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .4s both;}
   .status-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--steel);margin-bottom:20px;text-transform:uppercase;}
   .status-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-  .status-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;transition:.3s;}
+  .status-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;transition:.3s;color:white;}
   .status-btn:hover{border-color:rgba(100,180,255,.4);background:rgba(100,180,255,.08);transform:translateY(-4px);box-shadow:0 8px 24px rgba(100,180,255,.3);}
   .status-btn .icon{font-size:32px;margin-bottom:4px;}
-  .status-btn .label{font-size:13px;letter-spacing:1px;}
+  .status-btn .label{font-size:13px;letter-spacing:1px;color:white;}
 
   .footer{margin-top:32px;text-align:center;font-size:12px;color:rgba(255,255,255,.25);letter-spacing:.5px;}
 
@@ -177,9 +174,8 @@
     .alert-buttons{grid-template-columns:1fr 1fr;}
     .alert-buttons .alert-btn:last-child{grid-column:1/-1;}
     .status-buttons{grid-template-columns:1fr;}
-    .open-now-pill{max-width:150px;}
-    .festival-mood{font-size:12px;padding:8px 12px;}
-    .floating-train-btn{bottom:20px;left:20px;width:60px;height:60px;font-size:32px;}
+    .top-bar{flex-direction:column;gap:8px;}
+    .open-now-pill,.festival-mood{width:100%;max-width:none;}
   }
 </style>
 </head>
@@ -244,18 +240,18 @@
   </div>
 </div>
 
-<!-- FLOATING TRAIN HORN BUTTON -->
-<button class="floating-train-btn" id="trainHornBtn" onclick="playTrainHorn()" title="Train Horn">🚆</button>
+<!-- TOP BAR WITH PILLS -->
+<div class="top-bar">
+  <!-- TODAY'S OPEN WINDOW -->
+  <div class="open-now-pill">
+    <div class="pill-title"><span class="pill-dot"></span>Booking Open Now</div>
+    <div class="pill-date" id="pillDate">—</div>
+    <div class="pill-sub">Advance quota (60-day window)</div>
+  </div>
 
-<!-- TODAY'S OPEN WINDOW -->
-<div class="open-now-pill">
-  <div class="pill-title"><span class="pill-dot"></span>Booking Open Now</div>
-  <div class="pill-date" id="pillDate">—</div>
-  <div class="pill-sub">Advance quota (60-day window)</div>
+  <!-- FESTIVAL BADGE -->
+  <div class="festival-mood" id="festMood"></div>
 </div>
-
-<!-- FESTIVAL BADGE -->
-<div class="festival-mood" id="festMood"></div>
 
 <div class="page-wrap">
   <div class="header">
@@ -364,52 +360,6 @@
 </div>
 
 <script>
-/* ── TRAIN HORN SOUND GENERATOR ── */
-function playTrainHorn() {
-  try {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const now = audioContext.currentTime;
-    
-    // Train horn has 2 main frequencies
-    const frequencies = [400, 320];
-    const durations = [0.4, 0.4];
-    
-    frequencies.forEach((freq, idx) => {
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      osc.connect(gain);
-      gain.connect(audioContext.destination);
-      
-      gain.gain.setValueAtTime(0.3, now + idx * 0.4);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.4 + durations[idx]);
-      
-      osc.start(now + idx * 0.4);
-      osc.stop(now + idx * 0.4 + durations[idx]);
-    });
-    
-    // Add a brief pause and lower note
-    const finalFreq = 250;
-    const finalOsc = audioContext.createOscillator();
-    const finalGain = audioContext.createGain();
-    
-    finalOsc.type = 'sine';
-    finalOsc.frequency.value = finalFreq;
-    finalOsc.connect(finalGain);
-    finalGain.connect(audioContext.destination);
-    
-    finalGain.gain.setValueAtTime(0.2, now + 0.9);
-    finalGain.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
-    
-    finalOsc.start(now + 0.9);
-    finalOsc.stop(now + 1.2);
-  } catch(e) {
-    console.log('Train horn sound generation not supported');
-  }
-}
-
 /* ── CLOUDS GENERATOR ── */
 function spawnClouds() {
   const container = document.getElementById('cloudsContainer');
