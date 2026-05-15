@@ -34,70 +34,48 @@
   .particle{position:absolute;border-radius:50%;animation:fall var(--pd,4s) linear infinite var(--ps,0s);opacity:0;}
   @keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:.9}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
   
-  /* ── AIRPLANES ── */
+  /* ── AIRPLANES SVG ── */
   .airplanes-container{position:absolute;inset:0;overflow:hidden;z-index:1;}
-  .airplane{position:absolute;filter:drop-shadow(0 4px 12px rgba(100,150,255,.4));}
-  
-  /* Fuselage */
-  .airplane-fuselage{width:60px;height:16px;background:linear-gradient(90deg,#e8e8f8 0%,#d8d8e8 50%,#c8c8d8 100%);border-radius:20px 15px 15px 20px;position:relative;border:1px solid #a0a0b8;}
-  
-  /* Cockpit */
-  .airplane-cockpit{position:absolute;top:2px;left:8px;width:12px;height:10px;background:#4a5fa8;border-radius:3px;z-index:2;}
-  
-  /* Window */
-  .airplane-window{position:absolute;top:4px;left:22px;width:8px;height:6px;background:#87ceeb;border-radius:1px;box-shadow:inset 0 1px 2px rgba(0,0,0,.2);}
-  
-  /* Wings */
-  .airplane-wings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:20px;}
-  .wing-left{position:absolute;width:30px;height:4px;background:linear-gradient(90deg,#b8b8c8,#a8a8b8);right:50%;top:50%;transform:translateY(-50%);border-radius:2px;}
-  .wing-right{position:absolute;width:30px;height:4px;background:linear-gradient(90deg,#a8a8b8,#b8b8c8);left:50%;top:50%;transform:translateY(-50%);border-radius:2px;}
-  
-  /* Tail */
-  .airplane-tail{position:absolute;top:-1px;right:-8px;width:0;height:0;border-left:10px solid transparent;border-right:0 solid transparent;border-top:6px solid #d8d8e8;border-bottom:6px solid #d8d8e8;}
-  .tail-vertical{position:absolute;top:-6px;right:-6px;width:3px;height:12px;background:#d8d8e8;border-radius:1px;}
-  
-  /* Engine */
-  .airplane-engines{position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:60px;display:flex;justify-content:space-around;}
-  .engine{width:4px;height:3px;background:#4a4a5a;border-radius:1px;box-shadow:0 0 2px rgba(0,0,0,.8);}
+  .airplane{position:absolute;font-size:40px;opacity:0.7;filter:drop-shadow(0 4px 12px rgba(100,150,255,.3));}
   
   @keyframes planeArc1 {
-    0% { left: -100px; top: 15%; opacity: 0; transform: scaleX(0.8) scaleY(0.8) rotateZ(-8deg); }
-    5% { opacity: 1; }
-    50% { top: 10%; transform: scaleX(1) scaleY(1) rotateZ(-2deg); }
-    95% { opacity: 1; }
-    100% { left: 110vw; top: 30%; opacity: 0; transform: scaleX(0.8) scaleY(0.8) rotateZ(0deg); }
+    0% { left: -50px; top: 15%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
+    5% { opacity: 0.7; }
+    50% { top: 12%; transform: scaleX(1) scaleY(1) rotateZ(-5deg); }
+    95% { opacity: 0.7; }
+    100% { left: 110vw; top: 28%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
   }
   
   @keyframes planeArc2 {
-    0% { left: -90px; top: 8%; opacity: 0; transform: scaleX(0.7) scaleY(0.7) rotateZ(-10deg); }
-    5% { opacity: 1; }
-    50% { top: 5%; transform: scaleX(0.95) scaleY(0.95) rotateZ(-3deg); }
-    95% { opacity: 1; }
-    100% { left: 110vw; top: 25%; opacity: 0; transform: scaleX(0.7) scaleY(0.7) rotateZ(-1deg); }
+    0% { left: -50px; top: 8%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
+    5% { opacity: 0.7; }
+    50% { top: 6%; transform: scaleX(1) scaleY(1) rotateZ(-5deg); }
+    95% { opacity: 0.7; }
+    100% { left: 110vw; top: 22%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
   }
   
   @keyframes planeArc3 {
-    0% { left: -100px; top: 20%; opacity: 0; transform: scaleX(0.85) scaleY(0.85) rotateZ(-7deg); }
-    5% { opacity: 1; }
-    50% { top: 12%; transform: scaleX(1) scaleY(1) rotateZ(-2deg); }
-    95% { opacity: 1; }
-    100% { left: 110vw; top: 32%; opacity: 0; transform: scaleX(0.85) scaleY(0.85) rotateZ(1deg); }
+    0% { left: -50px; top: 20%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
+    5% { opacity: 0.7; }
+    50% { top: 18%; transform: scaleX(1) scaleY(1) rotateZ(-5deg); }
+    95% { opacity: 0.7; }
+    100% { left: 110vw; top: 32%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
   }
   
   @keyframes planeArc4 {
-    0% { left: -85px; top: 12%; opacity: 0; transform: scaleX(0.75) scaleY(0.75) rotateZ(-9deg); }
-    5% { opacity: 1; }
-    50% { top: 8%; transform: scaleX(0.9) scaleY(0.9) rotateZ(-3deg); }
-    95% { opacity: 1; }
-    100% { left: 110vw; top: 28%; opacity: 0; transform: scaleX(0.75) scaleY(0.75) rotateZ(0deg); }
+    0% { left: -50px; top: 10%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
+    5% { opacity: 0.7; }
+    50% { top: 8%; transform: scaleX(1) scaleY(1) rotateZ(-5deg); }
+    95% { opacity: 0.7; }
+    100% { left: 110vw; top: 24%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
   }
   
   @keyframes planeArc5 {
-    0% { left: -95px; top: 18%; opacity: 0; transform: scaleX(0.8) scaleY(0.8) rotateZ(-8deg); }
-    5% { opacity: 1; }
-    50% { top: 14%; transform: scaleX(0.95) scaleY(0.95) rotateZ(-1deg); }
-    95% { opacity: 1; }
-    100% { left: 110vw; top: 30%; opacity: 0; transform: scaleX(0.8) scaleY(0.8) rotateZ(2deg); }
+    0% { left: -50px; top: 16%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
+    5% { opacity: 0.7; }
+    50% { top: 14%; transform: scaleX(1) scaleY(1) rotateZ(-5deg); }
+    95% { opacity: 0.7; }
+    100% { left: 110vw; top: 30%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
   }
 
   .mountains{position:absolute;bottom:80px;left:0;right:0;height:160px;}
@@ -450,61 +428,35 @@
 </div>
 
 <script>
-/* ── AIRPLANE SPAWNER ── */
+/* ── AIRPLANE SVG CLIPART SPAWNER ── */
 function spawnAirplanes() {
   const container = document.getElementById('airplanesContainer');
   const animations = ['planeArc1', 'planeArc2', 'planeArc3', 'planeArc4', 'planeArc5'];
   
+  // SVG plane clipart in white
+  const planeSVG = `
+    <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:25px;fill:white;">
+      <!-- Fuselage -->
+      <ellipse cx="50" cy="25" rx="32" ry="12" fill="white"/>
+      <!-- Cockpit -->
+      <circle cx="20" cy="22" r="4" fill="white"/>
+      <!-- Wings -->
+      <rect x="35" y="20" width="30" height="3" fill="white" rx="1"/>
+      <!-- Tail wing -->
+      <rect x="78" y="22" width="12" height="2" fill="white" rx="1"/>
+      <!-- Vertical stabilizer -->
+      <polygon points="85,15 88,15 87,35" fill="white"/>
+      <!-- Window -->
+      <circle cx="45" cy="23" r="1.5" fill="#4a5fa8"/>
+      <!-- Nose cone -->
+      <polygon points="15,20 10,25 15,30" fill="white"/>
+    </svg>
+  `;
+  
   animations.forEach((anim, index) => {
     const plane = document.createElement('div');
     plane.className = 'airplane';
-    
-    // Fuselage
-    const fuselage = document.createElement('div');
-    fuselage.className = 'airplane-fuselage';
-    
-    // Cockpit
-    const cockpit = document.createElement('div');
-    cockpit.className = 'airplane-cockpit';
-    fuselage.appendChild(cockpit);
-    
-    // Window
-    const window = document.createElement('div');
-    window.className = 'airplane-window';
-    fuselage.appendChild(window);
-    
-    // Wings container
-    const wings = document.createElement('div');
-    wings.className = 'airplane-wings';
-    
-    const wingLeft = document.createElement('div');
-    wingLeft.className = 'wing-left';
-    const wingRight = document.createElement('div');
-    wingRight.className = 'wing-right';
-    wings.appendChild(wingLeft);
-    wings.appendChild(wingRight);
-    fuselage.appendChild(wings);
-    
-    // Tail
-    const tail = document.createElement('div');
-    tail.className = 'airplane-tail';
-    const tailVertical = document.createElement('div');
-    tailVertical.className = 'tail-vertical';
-    tail.appendChild(tailVertical);
-    fuselage.appendChild(tail);
-    
-    // Engines
-    const engines = document.createElement('div');
-    engines.className = 'airplane-engines';
-    const engine1 = document.createElement('div');
-    engine1.className = 'engine';
-    const engine2 = document.createElement('div');
-    engine2.className = 'engine';
-    engines.appendChild(engine1);
-    engines.appendChild(engine2);
-    fuselage.appendChild(engines);
-    
-    plane.appendChild(fuselage);
+    plane.innerHTML = planeSVG;
     
     const duration = 22 + index * 4;
     const delay = index * 6;
@@ -639,7 +591,7 @@ function spawnParticles(types) {
   // Clouds
   spawnClouds();
 
-  // Airplanes
+  // Airplanes with SVG clipart
   spawnAirplanes();
 
   // Today's open window pill
