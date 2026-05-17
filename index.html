@@ -78,6 +78,22 @@
     100% { left: 110vw; top: 30%; opacity: 0; transform: scaleX(1) scaleY(1) rotateZ(0deg); }
   }
 
+  @keyframes boeing747Arc1 {
+    0% { left: -100px; top: 25%; opacity: 0; }
+    5% { opacity: 0.6; }
+    50% { top: 22%; }
+    95% { opacity: 0.6; }
+    100% { left: 110vw; top: 35%; opacity: 0; }
+  }
+
+  @keyframes boeing747Arc2 {
+    0% { left: -100px; top: 5%; opacity: 0; }
+    5% { opacity: 0.6; }
+    50% { top: 3%; }
+    95% { opacity: 0.6; }
+    100% { left: 110vw; top: 15%; opacity: 0; }
+  }
+
   .mountains{position:absolute;bottom:80px;left:0;right:0;height:160px;}
   .mountain{position:absolute;bottom:0;width:0;height:0;border-style:solid;transition:border-bottom-color 1.8s;}
   .trees{position:absolute;bottom:76px;left:0;right:0;height:60px;display:flex;align-items:flex-end;overflow:hidden;}
@@ -530,6 +546,84 @@ function spawnAirplanes() {
   });
 }
 
+/* ── BOEING 747 SVG SPAWNER ── */
+function spawnBoeing747() {
+  const container = document.getElementById('airplanesContainer');
+  const animations = ['boeing747Arc1', 'boeing747Arc2'];
+  
+  // Realistic Boeing 747 SVG with 4 engines
+  const boeing747SVG = `
+    <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" style="width:100px;height:40px;">
+      <!-- Fuselage (main body) -->
+      <ellipse cx="100" cy="40" rx="60" ry="18" fill="#e0e0e0" stroke="#999" stroke-width="1"/>
+      
+      <!-- Upper deck (hump) -->
+      <ellipse cx="85" cy="25" rx="25" ry="12" fill="#e8e8e8" stroke="#999" stroke-width="0.8"/>
+      
+      <!-- Cockpit/Nose -->
+      <circle cx="30" cy="39" r="8" fill="#d0d0d0" stroke="#666" stroke-width="1"/>
+      <circle cx="28" cy="38" r="3" fill="#87ceeb"/>
+      
+      <!-- Cabin Windows -->
+      <circle cx="50" cy="32" r="2" fill="#87ceeb"/>
+      <circle cx="60" cy="31" r="2" fill="#87ceeb"/>
+      <circle cx="70" cy="30" r="2" fill="#87ceeb"/>
+      <circle cx="80" cy="28" r="2" fill="#87ceeb"/>
+      <circle cx="90" cy="27" r="2" fill="#87ceeb"/>
+      <circle cx="100" cy="27" r="2" fill="#87ceeb"/>
+      <circle cx="110" cy="28" r="2" fill="#87ceeb"/>
+      <circle cx="120" cy="30" r="2" fill="#87ceeb"/>
+      
+      <!-- Wings (Main) -->
+      <ellipse cx="100" cy="42" rx="75" ry="8" fill="#d5d5d5" stroke="#888" stroke-width="1"/>
+      
+      <!-- Tail Horizontal Stabilizer -->
+      <ellipse cx="160" cy="42" rx="25" ry="6" fill="#d5d5d5" stroke="#888" stroke-width="1"/>
+      
+      <!-- Vertical Stabilizer (Tail) -->
+      <polygon points="165,40 175,28 175,52" fill="#d0d0d0" stroke="#888" stroke-width="1"/>
+      
+      <!-- 4 Engines -->
+      <!-- Engine 1 (far left wing) -->
+      <circle cx="55" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
+      <circle cx="55" cy="50" r="2.5" fill="#888"/>
+      
+      <!-- Engine 2 (left wing inner) -->
+      <circle cx="85" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
+      <circle cx="85" cy="50" r="2.5" fill="#888"/>
+      
+      <!-- Engine 3 (right wing inner) -->
+      <circle cx="115" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
+      <circle cx="115" cy="50" r="2.5" fill="#888"/>
+      
+      <!-- Engine 4 (far right wing) -->
+      <circle cx="145" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
+      <circle cx="145" cy="50" r="2.5" fill="#888"/>
+      
+      <!-- Landing Gear (simplified) -->
+      <line x1="90" y1="59" x2="90" y2="68" stroke="#333" stroke-width="1"/>
+      <circle cx="90" cy="69" r="2" fill="#222"/>
+      <line x1="115" y1="59" x2="115" y2="68" stroke="#333" stroke-width="1"/>
+      <circle cx="115" cy="69" r="2" fill="#222"/>
+    </svg>
+  `;
+  
+  animations.forEach((anim, index) => {
+    const plane = document.createElement('div');
+    plane.className = 'airplane';
+    plane.innerHTML = boeing747SVG;
+    plane.style.opacity = '0.5';
+    plane.style.filter = 'drop-shadow(0 4px 12px rgba(100,150,255,.2))';
+    
+    const duration = 28 + index * 5;
+    const delay = 5 + index * 12;
+    plane.style.animation = `${anim} ${duration}s linear infinite`;
+    plane.style.animationDelay = `${delay}s`;
+    
+    container.appendChild(plane);
+  });
+}
+
 /* ── CLOUDS GENERATOR ── */
 function spawnClouds() {
   const container = document.getElementById('cloudsContainer');
@@ -647,15 +741,18 @@ function spawnParticles(types) {
     t.style.cssText=`border-bottom-width:${h}px;border-left-width:${h*.22}px;border-right-width:${h*.22}px;opacity:${.5+Math.random()*.5};`;
     tc.appendChild(t);
   }
-  // Sleepers - DO NOT ANIMATE
+  // Sleepers
   const sw=document.getElementById('sleepers');
   for(let i=0;i<40;i++){const s=document.createElement('div');s.className='sleeper';sw.appendChild(s);}
 
   // Clouds
   spawnClouds();
 
-  // Airplanes with SVG clipart
+  // Regular Airplanes
   spawnAirplanes();
+
+  // Boeing 747 Jumbo Jets
+  spawnBoeing747();
 
   // Today's open window pill
   const today=new Date(); today.setHours(0,0,0,0);
