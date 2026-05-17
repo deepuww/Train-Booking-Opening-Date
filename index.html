@@ -88,9 +88,8 @@
   .rail{position:absolute;height:4px;left:0;right:0;border-radius:2px;}
   .rail.top{top:0;background:#4a4a5a;}
   .rail.bottom{bottom:0;background:#4a4a5a;}
-  .sleepers{position:absolute;inset:0;display:flex;gap:28px;padding:0 20px;animation:moveSleepers 1.5s linear infinite;overflow:hidden;}
+  .sleepers{position:absolute;inset:0;display:flex;gap:28px;padding:0 20px;overflow:hidden;}
   .sleeper{width:14px;height:100%;background:#2a2a1a;border-radius:2px;flex-shrink:0;border:1px solid #3a3a2a;}
-  @keyframes moveSleepers{from{transform:translateX(0)}to{transform:translateX(-42px)}}
 
   /* ── VANDE BHARAT TRAIN ── */
   .train-wrap{
@@ -648,7 +647,7 @@ function spawnParticles(types) {
     t.style.cssText=`border-bottom-width:${h}px;border-left-width:${h*.22}px;border-right-width:${h*.22}px;opacity:${.5+Math.random()*.5};`;
     tc.appendChild(t);
   }
-  // Sleepers
+  // Sleepers - DO NOT ANIMATE
   const sw=document.getElementById('sleepers');
   for(let i=0;i<40;i++){const s=document.createElement('div');s.className='sleeper';sw.appendChild(s);}
 
