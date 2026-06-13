@@ -13,22 +13,126 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'DM Sans',sans-serif;background:#0f0f1a;color:var(--light);min-height:100vh;overflow-x:hidden;}
 
-  /* ── BG ── */
+  /* ── CINEMATIC AVIATION BACKGROUND ── */
   .bg-scene{position:fixed;inset:0;z-index:0;overflow:hidden;}
+  
+  /* Sky gradient */
   .bg-sky{position:absolute;inset:0;transition:background 1.8s ease;}
+  
+  /* Distant aircraft layer (high altitude, smallest) */
+  .aircraft-layer-far{position:absolute;inset:0;overflow:hidden;z-index:1;}
+  .aircraft-far{position:absolute;opacity:0.2;font-size:20px;filter:blur(1px);}
+  
+  /* Middle aircraft layer (medium altitude) */
+  .aircraft-layer-mid{position:absolute;inset:0;overflow:hidden;z-index:2;}
+  .aircraft-mid{position:absolute;opacity:0.4;font-size:35px;filter:drop-shadow(0 2px 6px rgba(100,150,255,.15));}
+  
+  /* Close aircraft layer (near altitude, largest) */
+  .aircraft-layer-close{position:absolute;inset:0;overflow:hidden;z-index:3;}
+  .aircraft-close{position:absolute;opacity:0.6;font-size:50px;filter:drop-shadow(0 4px 15px rgba(100,180,255,.3));}
+  
+  /* Aircraft animations with parallax effect */
+  @keyframes aircraftFar1 { 
+    0% { left: -80px; top: 12%; opacity: 0.1; transform: scaleX(1) scaleY(1); } 
+    10% { opacity: 0.2; } 
+    90% { opacity: 0.2; } 
+    100% { left: 110vw; top: 18%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+  }
+  @keyframes aircraftFar2 { 
+    0% { left: -80px; top: 8%; opacity: 0.1; transform: scaleX(1) scaleY(1); } 
+    10% { opacity: 0.2; } 
+    90% { opacity: 0.2; } 
+    100% { left: 110vw; top: 14%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+  }
+  @keyframes aircraftFar3 { 
+    0% { left: -80px; top: 20%; opacity: 0.1; transform: scaleX(1) scaleY(1); } 
+    10% { opacity: 0.2; } 
+    90% { opacity: 0.2; } 
+    100% { left: 110vw; top: 26%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+  }
+  
+  @keyframes aircraftMid1 { 
+    0% { left: -100px; top: 25%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+    5% { opacity: 0.4; } 
+    50% { top: 22%; } 
+    95% { opacity: 0.4; } 
+    100% { left: 110vw; top: 32%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+  }
+  @keyframes aircraftMid2 { 
+    0% { left: -100px; top: 35%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+    5% { opacity: 0.4; } 
+    50% { top: 32%; } 
+    95% { opacity: 0.4; } 
+    100% { left: 110vw; top: 42%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+  }
+  @keyframes aircraftMid3 { 
+    0% { left: -100px; top: 30%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+    5% { opacity: 0.4; } 
+    50% { top: 27%; } 
+    95% { opacity: 0.4; } 
+    100% { left: 110vw; top: 37%; opacity: 0; transform: scaleX(1) scaleY(1); } 
+  }
+  
+  @keyframes aircraftClose1 { 
+    0% { left: -120px; top: 45%; opacity: 0; transform: scaleX(1) scaleY(1); filter: blur(0px); } 
+    2% { opacity: 0.6; filter: blur(0.5px); } 
+    50% { top: 40%; filter: blur(1px); } 
+    98% { opacity: 0.6; filter: blur(0.5px); } 
+    100% { left: 110vw; top: 52%; opacity: 0; transform: scaleX(1) scaleY(1); filter: blur(2px); } 
+  }
+  @keyframes aircraftClose2 { 
+    0% { left: -120px; top: 50%; opacity: 0; transform: scaleX(1) scaleY(1); filter: blur(0px); } 
+    2% { opacity: 0.6; filter: blur(0.5px); } 
+    50% { top: 45%; filter: blur(1px); } 
+    98% { opacity: 0.6; filter: blur(0.5px); } 
+    100% { left: 110vw; top: 57%; opacity: 0; transform: scaleX(1) scaleY(1); filter: blur(2px); } 
+  }
+  @keyframes aircraftClose3 { 
+    0% { left: -120px; top: 55%; opacity: 0; transform: scaleX(1) scaleY(1); filter: blur(0px); } 
+    2% { opacity: 0.6; filter: blur(0.5px); } 
+    50% { top: 50%; filter: blur(1px); } 
+    98% { opacity: 0.6; filter: blur(0.5px); } 
+    100% { left: 110vw; top: 62%; opacity: 0; transform: scaleX(1) scaleY(1); filter: blur(2px); } 
+  }
+  
+  /* Layered clouds with atmospheric depth */
+  .clouds-far{position:absolute;inset:0;overflow:hidden;z-index:1;}
+  .cloud-far{position:absolute;background:rgba(200,220,255,0.08);border-radius:100px;opacity:0.3;animation:driftFar var(--duration,40s) linear infinite;}
+  .cloud-far::before,.cloud-far::after{content:'';position:absolute;background:inherit;border-radius:inherit;}
+  .cloud-far::before{width:60px;height:40px;top:-20px;left:15px;}
+  .cloud-far::after{width:50px;height:35px;top:-18px;right:15px;}
+  @keyframes driftFar{0%{transform:translateX(-100px)}100%{transform:translateX(calc(100vw + 100px))}}
+  
+  .clouds-mid{position:absolute;inset:0;overflow:hidden;z-index:2;}
+  .cloud-mid{position:absolute;background:rgba(255,255,255,0.5);border-radius:100px;opacity:0.5;animation:driftMid var(--duration,30s) linear infinite;}
+  .cloud-mid::before,.cloud-mid::after{content:'';position:absolute;background:inherit;border-radius:inherit;}
+  .cloud-mid::before{width:55px;height:45px;top:-22px;left:12px;}
+  .cloud-mid::after{width:45px;height:38px;top:-20px;right:12px;}
+  @keyframes driftMid{0%{transform:translateX(-100px)}100%{transform:translateX(calc(100vw + 100px))}}
+  
+  .clouds-near{position:absolute;inset:0;overflow:hidden;z-index:4;}
+  .cloud-near{position:absolute;background:rgba(255,255,255,0.7);border-radius:100px;opacity:0.6;animation:driftNear var(--duration,20s) linear infinite;}
+  .cloud-near::before,.cloud-near::after{content:'';position:absolute;background:inherit;border-radius:inherit;}
+  .cloud-near::before{width:50px;height:50px;top:-25px;left:10px;}
+  .cloud-near::after{width:40px;height:40px;top:-20px;right:10px;}
+  @keyframes driftNear{0%{transform:translateX(-100px)}100%{transform:translateX(calc(100vw + 100px))}}
+  
+  /* Stars with twinkling */
   .stars{position:absolute;inset:0;}
   .star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);}
   @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
-  .moon{position:absolute;top:40px;right:120px;width:60px;height:60px;background:radial-gradient(circle at 35% 35%,#fffde0,#f0d060);border-radius:50%;box-shadow:0 0 40px rgba(240,208,96,.4),0 0 80px rgba(240,208,96,.2);}
-  .sun{position:absolute;top:30px;right:140px;width:70px;height:70px;background:radial-gradient(circle,#fff9c4,#FFD700);border-radius:50%;box-shadow:0 0 60px rgba(255,215,0,.7),0 0 120px rgba(255,215,0,.4);}
   
-  /* ── CLOUDS ── */
-  .clouds-container{position:absolute;inset:0;overflow:hidden;z-index:2;}
-  .cloud{position:absolute;background:rgba(255,255,255,0.7);border-radius:100px;opacity:0.6;animation:drift var(--duration,20s) linear infinite;}
-  .cloud::before,.cloud::after{content:'';position:absolute;background:inherit;border-radius:inherit;}
-  .cloud::before{width:50px;height:50px;top:-25px;left:10px;}
-  .cloud::after{width:40px;height:40px;top:-20px;right:10px;}
-  @keyframes drift{0%{transform:translateX(-100px)}100%{transform:translateX(calc(100vw + 100px))}}
+  /* Moon and sun */
+  .moon{position:absolute;top:40px;right:120px;width:60px;height:60px;background:radial-gradient(circle at 35% 35%,#fffde0,#f0d060);border-radius:50%;box-shadow:0 0 40px rgba(240,208,96,.4),0 0 80px rgba(240,208,96,.2);}
+  .sun{position:absolute;top:30px;right:140px;width:70px;height:70px;background:radial-gradient(circle,#fff9c4,#FFD700);border-radius:50%;box-shadow:0 0 60px rgba(255,215,0,.7),0 0 120px rgba(255,215,0,.5);}
+  
+  /* Atmospheric glow and light rays */
+  .atmosphere{position:absolute;inset:0;background:radial-gradient(ellipse at center top, rgba(100,150,255,0.1) 0%, transparent 60%);pointer-events:none;}
+  
+  /* Light rays effect */
+  .light-rays{position:absolute;inset:0;overflow:hidden;z-index:2;}
+  .ray{position:absolute;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);animation:shimmer 8s ease-in-out infinite;}
+  @keyframes shimmer{0%{opacity:0;transform:translateX(-100vw) skewX(-45deg)}50%{opacity:0.5}100%{opacity:0;transform:translateX(100vw) skewX(-45deg)}}
   
   .particles{position:absolute;inset:0;pointer-events:none;}
   .particle{position:absolute;border-radius:50%;animation:fall var(--pd,4s) linear infinite var(--ps,0s);opacity:0;}
@@ -153,6 +257,7 @@
   .pill-dot{display:inline-block;width:6px;height:6px;background:#2ecc71;border-radius:50%;margin-right:5px;animation:blink 1.4s ease-in-out infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   .pill-date{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#5dade2;line-height:1.1;}
+  .pill-day{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:0.5px;color:rgba(93,173,226,.7);line-height:1;}
   .pill-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:2px;}
 
   /* Festival badge */
@@ -161,7 +266,7 @@
   /* Header */
   .header{text-align:center;margin-bottom:36px;animation:fadeDown .8s ease both;}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;line-height:1;background:linear-gradient(135deg,#ffffff 0%,#f0d060 50%,#e67e22 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;line-height:1;background:linear-gradient(135deg,#ffffff 0%,#f0d060 50%,#e67e22 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
   .tagline{font-size:15px;color:var(--steel);letter-spacing:1px;}
 
   /* Card */
@@ -170,15 +275,15 @@
   .field-group{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
   .field{display:flex;flex-direction:column;gap:8px;}
   .field label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--steel);}
-  .field input,.field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'DM Sans',sans-serif;color:white;outline:none;transition:border .3s;}
+  .field input,.field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;font-size:15px;font-family:'DM Sans',sans-serif;color:white;transition:all .3s;}
   .field input:focus,.field select:focus{border-color:rgba(230,126,34,.6);background:rgba(255,255,255,.09);}
   .field select option{background:#1a1a2e;color:white;}
   .field input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1) opacity(.5);cursor:pointer;}
 
   /* Train button */
   .btn-train{width:100%;padding:0;border:none;background:none;cursor:pointer;margin-top:8px;}
-  .btn-track{width:100%;height:12px;background:repeating-linear-gradient(90deg,transparent 0,transparent 16px,rgba(255,255,255,.15) 16px,rgba(255,255,255,.15) 28px);border-top:3px solid rgba(255,255,255,.1);border-bottom:3px solid rgba(255,255,255,.1);}
-  .btn-engine-wrap{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#2196F3,#1976D2);border-radius:12px;padding:14px 24px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:white;position:relative;overflow:hidden;transition:all .3s;}
+  .btn-track{width:100%;height:12px;background:repeating-linear-gradient(90deg,transparent 0,transparent 16px,rgba(255,255,255,.15) 16px,rgba(255,255,255,.15) 28px);border-top:3px solid rgba(255,255,255,.2);border-bottom:3px solid rgba(255,255,255,.2);}
+  .btn-engine-wrap{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#2196F3,#1976D2);border-radius:12px;padding:14px 24px;font-family:'Bebas Neue',sans-serif;color:white;font-size:16px;letter-spacing:2px;position:relative;transition:all .3s;box-shadow:0 4px 20px rgba(33,150,243,.5);}
   .btn-engine-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);pointer-events:none;}
   .btn-train:hover .btn-engine-wrap{transform:translateX(8px);box-shadow:0 6px 30px rgba(33,150,243,.7);}
   .btn-train:active .btn-engine-wrap{transform:translateX(2px);}
@@ -211,25 +316,25 @@
   .alert-title{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--steel);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
   .alert-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08);}
   .alert-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-  .alert-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;color:white;transition:.3s;}
+  .alert-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;transition:all .3s;}
   .alert-btn:hover{border-color:rgba(33,150,243,.4);background:rgba(33,150,243,.08);transform:translateY(-2px);}
   .alert-btn .icon{font-size:20px;}
   .tip-box{margin-top:16px;padding:14px 16px;background:rgba(241,196,15,.06);border:1px solid rgba(241,196,15,.2);border-radius:12px;font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;}
 
   /* Status Card Section */
-  .status-card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .4s both;}
+  .status-card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .3s both;}
   .status-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--steel);margin-bottom:20px;text-transform:uppercase;}
   .status-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-  .status-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;text-decoration:none;color:white;transition:.3s;}
+  .status-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;transition:all .3s;}
   .status-btn:hover{border-color:rgba(100,180,255,.4);background:rgba(100,180,255,.08);transform:translateY(-4px);box-shadow:0 8px 24px rgba(100,180,255,.3);}
   .status-btn .icon{font-size:32px;margin-bottom:4px;}
   .status-btn .label{font-size:13px;letter-spacing:1px;color:white;}
 
   /* Flight Card Section */
-  .flight-card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .5s both;}
+  .flight-card{width:100%;max-width:560px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;backdrop-filter:blur(20px);animation:fadeUp .8s ease .4s both;}
   .flight-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--steel);margin-bottom:20px;text-transform:uppercase;}
   .flight-buttons{display:grid;grid-template-columns:1fr;gap:14px;}
-  .flight-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:14px;border:1px solid rgba(255,165,0,.2);background:rgba(255,165,0,.08);cursor:pointer;text-decoration:none;color:white;transition:.3s;}
+  .flight-btn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px;border-radius:14px;border:1px solid rgba(255,165,0,.2);background:rgba(255,165,0,.08);cursor:pointer;text-decoration:none;transition:all .3s;}
   .flight-btn:hover{border-color:rgba(255,165,0,.6);background:rgba(255,165,0,.15);transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,165,0,.3);}
   .flight-btn .icon{font-size:32px;margin-bottom:4px;}
   .flight-btn .label{font-size:15px;letter-spacing:1px;color:white;font-weight:600;}
@@ -255,6 +360,7 @@
     .open-now-pill,.festival-mood{width:100%;max-width:none;padding:8px 12px;}
     .pill-title{font-size:8px;}
     .pill-date{font-size:16px;}
+    .pill-day{font-size:11px;}
     .pill-sub{font-size:9px;}
     h1{font-size:clamp(36px,6vw,48px);}
     .header{margin-bottom:24px;}
@@ -292,6 +398,7 @@
     .open-now-pill,.festival-mood{padding:7px 10px;font-size:11px;border-radius:10px;}
     .pill-title{font-size:7px;margin-bottom:2px;}
     .pill-date{font-size:14px;}
+    .pill-day{font-size:10px;}
     .pill-sub{font-size:8px;}
     h1{font-size:clamp(28px,5vw,40px);letter-spacing:2px;}
     .header{margin-bottom:20px;}
@@ -318,12 +425,22 @@
 
 <div class="bg-scene">
   <div class="bg-sky" id="bgSky"></div>
-  <div class="clouds-container" id="cloudsContainer"></div>
-  <div class="airplanes-container" id="airplanesContainer"></div>
+  
+  <!-- Cinematic Aviation Background Layers -->
+  <div class="atmosphere"></div>
+  <div class="light-rays" id="lightRays"></div>
+  <div class="clouds-far" id="cloudsFar"></div>
+  <div class="aircraft-layer-far" id="aircraftLayerFar"></div>
+  <div class="clouds-mid" id="cloudsMid"></div>
+  <div class="aircraft-layer-mid" id="aircraftLayerMid"></div>
+  <div class="clouds-near" id="cloudsNear"></div>
+  <div class="aircraft-layer-close" id="aircraftLayerClose"></div>
+  
   <div class="stars" id="stars"></div>
   <div class="sun" id="sun"></div>
   <div class="moon" id="moon"></div>
   <div class="particles" id="particles"></div>
+  
   <div class="mountains" id="mountains">
     <div class="mountain" id="m1" style="left:0;   border-left:120px solid transparent;border-right:80px  solid transparent;border-bottom:130px solid #0a1a0a;"></div>
     <div class="mountain" id="m2" style="left:140px;border-left:90px  solid transparent;border-right:110px solid transparent;border-bottom:100px solid #0d200d;"></div>
@@ -382,6 +499,7 @@
   <div class="open-now-pill">
     <div class="pill-title"><span class="pill-dot"></span>Booking Open Now</div>
     <div class="pill-date" id="pillDate">—</div>
+    <div class="pill-day" id="pillDay"></div>
     <div class="pill-sub">Advance quota (60-day window)</div>
   </div>
 
@@ -507,137 +625,59 @@
 </div>
 
 <script>
-/* ── AIRPLANE SVG CLIPART SPAWNER ── */
-function spawnAirplanes() {
-  const container = document.getElementById('airplanesContainer');
-  const animations = ['planeArc1', 'planeArc2', 'planeArc3', 'planeArc4', 'planeArc5'];
+/* ── CINEMATIC AVIATION BACKGROUND SPAWNER ── */
+function spawnCinematicAircraft() {
+  const farContainer = document.getElementById('aircraftLayerFar');
+  const midContainer = document.getElementById('aircraftLayerMid');
+  const closeContainer = document.getElementById('aircraftLayerClose');
   
-  // SVG plane clipart in white
-  const planeSVG = `
-    <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:25px;fill:white;">
-      <!-- Fuselage -->
-      <ellipse cx="50" cy="25" rx="32" ry="12" fill="white"/>
-      <!-- Cockpit -->
-      <circle cx="20" cy="22" r="4" fill="white"/>
-      <!-- Wings -->
-      <rect x="35" y="20" width="30" height="3" fill="white" rx="1"/>
-      <!-- Tail wing -->
-      <rect x="78" y="22" width="12" height="2" fill="white" rx="1"/>
-      <!-- Vertical stabilizer -->
-      <polygon points="85,15 88,15 87,35" fill="white"/>
-      <!-- Window -->
-      <circle cx="45" cy="23" r="1.5" fill="#4a5fa8"/>
-      <!-- Nose cone -->
-      <polygon points="15,20 10,25 15,30" fill="white"/>
-    </svg>
-  `;
-  
-  animations.forEach((anim, index) => {
+  // Far layer aircraft (distant, small, blurred)
+  const farAnimations = ['aircraftFar1', 'aircraftFar2', 'aircraftFar3'];
+  farAnimations.forEach((anim, idx) => {
     const plane = document.createElement('div');
-    plane.className = 'airplane';
-    plane.innerHTML = planeSVG;
-    
-    const duration = 22 + index * 4;
-    const delay = index * 6;
-    plane.style.animation = `${anim} ${duration}s linear infinite`;
-    plane.style.animationDelay = `${delay}s`;
-    
-    container.appendChild(plane);
+    plane.className = 'aircraft-far';
+    plane.textContent = '✈️';
+    plane.style.animation = `${anim} ${32 + idx * 6}s linear infinite`;
+    plane.style.animationDelay = `${idx * 8}s`;
+    farContainer.appendChild(plane);
+  });
+  
+  // Mid layer aircraft (medium distance)
+  const midAnimations = ['aircraftMid1', 'aircraftMid2', 'aircraftMid3'];
+  midAnimations.forEach((anim, idx) => {
+    const plane = document.createElement('div');
+    plane.className = 'aircraft-mid';
+    plane.textContent = '✈️';
+    plane.style.animation = `${anim} ${26 + idx * 4}s linear infinite`;
+    plane.style.animationDelay = `${2 + idx * 10}s`;
+    midContainer.appendChild(plane);
+  });
+  
+  // Close layer aircraft (near, large, with motion blur)
+  const closeAnimations = ['aircraftClose1', 'aircraftClose2', 'aircraftClose3'];
+  closeAnimations.forEach((anim, idx) => {
+    const plane = document.createElement('div');
+    plane.className = 'aircraft-close';
+    plane.textContent = '✈️';
+    plane.style.animation = `${anim} ${22 + idx * 5}s linear infinite`;
+    plane.style.animationDelay = `${4 + idx * 12}s`;
+    closeContainer.appendChild(plane);
   });
 }
 
-/* ── BOEING 747 SVG SPAWNER ── */
-function spawnBoeing747() {
-  const container = document.getElementById('airplanesContainer');
-  const animations = ['boeing747Arc1', 'boeing747Arc2'];
-  
-  // Realistic Boeing 747 SVG with 4 engines
-  const boeing747SVG = `
-    <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" style="width:100px;height:40px;">
-      <!-- Fuselage (main body) -->
-      <ellipse cx="100" cy="40" rx="60" ry="18" fill="#e0e0e0" stroke="#999" stroke-width="1"/>
-      
-      <!-- Upper deck (hump) -->
-      <ellipse cx="85" cy="25" rx="25" ry="12" fill="#e8e8e8" stroke="#999" stroke-width="0.8"/>
-      
-      <!-- Cockpit/Nose -->
-      <circle cx="30" cy="39" r="8" fill="#d0d0d0" stroke="#666" stroke-width="1"/>
-      <circle cx="28" cy="38" r="3" fill="#87ceeb"/>
-      
-      <!-- Cabin Windows -->
-      <circle cx="50" cy="32" r="2" fill="#87ceeb"/>
-      <circle cx="60" cy="31" r="2" fill="#87ceeb"/>
-      <circle cx="70" cy="30" r="2" fill="#87ceeb"/>
-      <circle cx="80" cy="28" r="2" fill="#87ceeb"/>
-      <circle cx="90" cy="27" r="2" fill="#87ceeb"/>
-      <circle cx="100" cy="27" r="2" fill="#87ceeb"/>
-      <circle cx="110" cy="28" r="2" fill="#87ceeb"/>
-      <circle cx="120" cy="30" r="2" fill="#87ceeb"/>
-      
-      <!-- Wings (Main) -->
-      <ellipse cx="100" cy="42" rx="75" ry="8" fill="#d5d5d5" stroke="#888" stroke-width="1"/>
-      
-      <!-- Tail Horizontal Stabilizer -->
-      <ellipse cx="160" cy="42" rx="25" ry="6" fill="#d5d5d5" stroke="#888" stroke-width="1"/>
-      
-      <!-- Vertical Stabilizer (Tail) -->
-      <polygon points="165,40 175,28 175,52" fill="#d0d0d0" stroke="#888" stroke-width="1"/>
-      
-      <!-- 4 Engines -->
-      <!-- Engine 1 (far left wing) -->
-      <circle cx="55" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
-      <circle cx="55" cy="50" r="2.5" fill="#888"/>
-      
-      <!-- Engine 2 (left wing inner) -->
-      <circle cx="85" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
-      <circle cx="85" cy="50" r="2.5" fill="#888"/>
-      
-      <!-- Engine 3 (right wing inner) -->
-      <circle cx="115" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
-      <circle cx="115" cy="50" r="2.5" fill="#888"/>
-      
-      <!-- Engine 4 (far right wing) -->
-      <circle cx="145" cy="50" r="4" fill="#555" stroke="#333" stroke-width="0.5"/>
-      <circle cx="145" cy="50" r="2.5" fill="#888"/>
-      
-      <!-- Landing Gear (simplified) -->
-      <line x1="90" y1="59" x2="90" y2="68" stroke="#333" stroke-width="1"/>
-      <circle cx="90" cy="69" r="2" fill="#222"/>
-      <line x1="115" y1="59" x2="115" y2="68" stroke="#333" stroke-width="1"/>
-      <circle cx="115" cy="69" r="2" fill="#222"/>
-    </svg>
-  `;
-  
-  animations.forEach((anim, index) => {
-    const plane = document.createElement('div');
-    plane.className = 'airplane';
-    plane.innerHTML = boeing747SVG;
-    plane.style.opacity = '0.5';
-    plane.style.filter = 'drop-shadow(0 4px 12px rgba(100,150,255,.2))';
-    
-    const duration = 28 + index * 5;
-    const delay = 5 + index * 12;
-    plane.style.animation = `${anim} ${duration}s linear infinite`;
-    plane.style.animationDelay = `${delay}s`;
-    
-    container.appendChild(plane);
-  });
-}
-
-/* ── CLOUDS GENERATOR ── */
-function spawnClouds() {
-  const container = document.getElementById('cloudsContainer');
-  const cloudConfigs = [
-    {top: '10%', width: '80px', height: '40px', duration: '25s', delay: '0s'},
-    {top: '25%', width: '100px', height: '50px', duration: '30s', delay: '5s'},
-    {top: '35%', width: '90px', height: '45px', duration: '28s', delay: '10s'},
-    {top: '15%', width: '110px', height: '55px', duration: '35s', delay: '15s'},
-    {top: '40%', width: '85px', height: '42px', duration: '26s', delay: '8s'},
+/* ── LAYERED CLOUDS GENERATOR ── */
+function spawnLayeredClouds() {
+  // Far clouds (atmospheric, subtle)
+  const farContainer = document.getElementById('cloudsFar');
+  const farCloudConfigs = [
+    {top: '5%', width: '120px', height: '60px', duration: '50s', delay: '0s'},
+    {top: '15%', width: '140px', height: '70px', duration: '55s', delay: '10s'},
+    {top: '25%', width: '130px', height: '65px', duration: '52s', delay: '20s'},
   ];
   
-  cloudConfigs.forEach(config => {
+  farCloudConfigs.forEach(config => {
     const cloud = document.createElement('div');
-    cloud.className = 'cloud';
+    cloud.className = 'cloud-far';
     cloud.style.cssText = `
       top: ${config.top};
       width: ${config.width};
@@ -645,19 +685,82 @@ function spawnClouds() {
       --duration: ${config.duration};
       animation-delay: ${config.delay};
     `;
-    container.appendChild(cloud);
+    farContainer.appendChild(cloud);
   });
+  
+  // Mid clouds
+  const midContainer = document.getElementById('cloudsMid');
+  const midCloudConfigs = [
+    {top: '10%', width: '100px', height: '50px', duration: '40s', delay: '0s'},
+    {top: '20%', width: '110px', height: '55px', duration: '42s', delay: '8s'},
+    {top: '30%', width: '95px', height: '48px', duration: '38s', delay: '16s'},
+    {top: '18%', width: '120px', height: '60px', duration: '45s', delay: '5s'},
+  ];
+  
+  midCloudConfigs.forEach(config => {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud-mid';
+    cloud.style.cssText = `
+      top: ${config.top};
+      width: ${config.width};
+      height: ${config.height};
+      --duration: ${config.duration};
+      animation-delay: ${config.delay};
+    `;
+    midContainer.appendChild(cloud);
+  });
+  
+  // Near clouds (closest to viewer)
+  const nearContainer = document.getElementById('cloudsNear');
+  const nearCloudConfigs = [
+    {top: '15%', width: '80px', height: '40px', duration: '25s', delay: '0s'},
+    {top: '28%', width: '100px', height: '50px', duration: '30s', delay: '5s'},
+    {top: '35%', width: '90px', height: '45px', duration: '28s', delay: '10s'},
+    {top: '18%', width: '110px', height: '55px', duration: '35s', delay: '15s'},
+    {top: '40%', width: '85px', height: '42px', duration: '26s', delay: '8s'},
+  ];
+  
+  nearCloudConfigs.forEach(config => {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud-near';
+    cloud.style.cssText = `
+      top: ${config.top};
+      width: ${config.width};
+      height: ${config.height};
+      --duration: ${config.duration};
+      animation-delay: ${config.delay};
+    `;
+    nearContainer.appendChild(cloud);
+  });
+}
+
+/* ── LIGHT RAYS EFFECT ── */
+function spawnLightRays() {
+  const container = document.getElementById('lightRays');
+  for (let i = 0; i < 3; i++) {
+    const ray = document.createElement('div');
+    ray.className = 'ray';
+    ray.style.cssText = `
+      left: ${20 + i * 30}%;
+      top: 0;
+      width: 200px;
+      height: 100vh;
+      animation-duration: ${8 + i * 2}s;
+      animation-delay: ${i * 3}s;
+    `;
+    container.appendChild(ray);
+  }
 }
 
 /* ── FESTIVAL THEMES ── */
 const THEMES = {
   default:   { sky:['#0a0a1a','#0f1a2e','#1a2a1a','#0f1a0f'], ground:'#111811', tree:'#0d2b0d', mtn:'#0a1a0a', moon:1, sun:0, particles:[], label:'' },
-  newyear:   { sky:['#05001f','#0a0038','#050025','#020010'], ground:'#0a0818', tree:'#0d0d25', mtn:'#050018', moon:.9, sun:0, particles:[{c:'#FFD700'},{c:'#FF69B4'},{c:'#00BFFF'},{c:'#FF6347'}], label:'🎆 New Year' },
-  holi:      { sky:['#1a0530','#2d1555','#3a1040','#18051f'], ground:'#1a0d1a', tree:'#330d33', mtn:'#12031a', moon:.5, sun:.4, particles:[{c:'#FF1493'},{c:'#00BFFF'},{c:'#FFD700'},{c:'#FF6347'}], label:'🎨 Holi' },
+  newyear:   { sky:['#05001f','#0a0038','#050025','#020010'], ground:'#0a0818', tree:'#0d0d25', mtn:'#050018', moon:.9, sun:0, particles:[{c:'#FFD700'},{c:'#FF69B4'},{c:'#00BFFF'},{c:'#FF6347'}], label:'🎆 New Year Vibes' },
+  holi:      { sky:['#1a0530','#2d1555','#3a1040','#18051f'], ground:'#1a0d1a', tree:'#330d33', mtn:'#12031a', moon:.5, sun:.4, particles:[{c:'#FF1493'},{c:'#00BFFF'},{c:'#FFD700'},{c:'#FF6347'}], label:'🎨 Holi Magic' },
   summer:    { sky:['#0a1a3a','#0f2a5a','#1a3a6a','#0f2050'], ground:'#1a2010', tree:'#1a4a1a', mtn:'#0a1a0a', moon:.3, sun:1, particles:[{c:'#FFD700',s:3},{c:'#FFF9C4',s:2}], label:'☀️ Summer' },
   dussehra:  { sky:['#0f0a00','#2a1500','#1a0f00','#0f0800'], ground:'#1a1000', tree:'#1a2800', mtn:'#0a0800', moon:.8, sun:0, particles:[{c:'#FF4500'},{c:'#FF8C00'},{c:'#FFD700'},{c:'#FF6347'}], label:'🏹 Dussehra' },
   diwali:    { sky:['#0f0800','#1f1200','#0f0800','#080400'], ground:'#1a0f00', tree:'#1a1500', mtn:'#0a0800', moon:.5, sun:0, particles:[{c:'#FFD700'},{c:'#FF8C00'},{c:'#FF4500'},{c:'#FFA500'},{c:'#FF69B4'}], label:'🪔 Diwali' },
-  christmas: { sky:['#001a0a','#002a14','#001a0a','#001005'], ground:'#d8eef8', tree:'#0d3d0d', mtn:'#b0cee0', moon:1, sun:0, particles:[{c:'#fff',s:10},{c:'#e0f0ff',s:7},{c:'#cce8ff',s:5}], label:'🎄 Christmas' }
+  christmas: { sky:['#001a0a','#002a14','#001a0a','#001005'], ground:'#d8eef8', tree:'#0d3d0d', mtn:'#b0cee0', moon:1, sun:0, particles:[{c:'#fff',s:10},{c:'#e0f0ff',s:7},{c:'#cce8ff',s:5}], label:'🎄 Christmas' },
 };
 
 function themeForMonth(m) {
@@ -745,19 +848,20 @@ function spawnParticles(types) {
   const sw=document.getElementById('sleepers');
   for(let i=0;i<40;i++){const s=document.createElement('div');s.className='sleeper';sw.appendChild(s);}
 
-  // Clouds
-  spawnClouds();
+  // Layered clouds
+  spawnLayeredClouds();
 
-  // Regular Airplanes
-  spawnAirplanes();
+  // Cinematic aircraft
+  spawnCinematicAircraft();
+  
+  // Light rays
+  spawnLightRays();
 
-  // Boeing 747 Jumbo Jets
-  spawnBoeing747();
-
-  // Today's open window pill
+  // Today's open window pill with day
   const today=new Date(); today.setHours(0,0,0,0);
   const openFor=new Date(today); openFor.setDate(openFor.getDate()+60);
   document.getElementById('pillDate').textContent=openFor.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('pillDay').textContent=openFor.toLocaleDateString('en-IN',{weekday:'short'});
 
   // Apply default theme
   applyTheme('default');
